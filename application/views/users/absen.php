@@ -110,11 +110,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" name="is_katekisan" type="checkbox" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Apakah anda katekisan ? (Centang jika ya, jangan dicentang jika tidak)
-                                </label>
+                            <br>
+
+                            <div class="row">
+                                <div class="col">
+                                    <h5>Apakah anda katekisan?</h5>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="is_katekisan" id="inlineRadio1" value="true">
+                                        <label class="form-check-label" for="inlineRadio1">Ya</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="is_katekisan" id="inlineRadio2" value="false" checked>
+                                        <label class="form-check-label" for="inlineRadio2">Tidak</label>
+                                    </div>
+                                </div>
                             </div>
                             <hr>
                             <div class="form-group">
