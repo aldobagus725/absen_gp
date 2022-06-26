@@ -21,7 +21,7 @@ class Absen extends CI_Controller{
 	}
 	// Masukin Absen - Anggota GP
     public function absenGp(){
-		$post['id_sektor'] = trim($this->input->post('id_sektor'));
+		$post['id_sektor'] = trim($this->input->post('sektor'));
 		$post['nama_lengkap'] = trim($this->input->post('nama_lengkap'));
 		$post['nomor_telepon'] = trim($this->input->post('nomor_telepon'));
 		$post['is_katekisan'] = trim($this->input->post('is_katekisan'));

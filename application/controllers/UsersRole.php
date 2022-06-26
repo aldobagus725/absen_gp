@@ -5,19 +5,15 @@ class UsersRole extends CI_Controller{
 		parent::__construct();
 		date_default_timezone_set('Asia/Singapore');
 		$this->load->model('Usersrole_model');
-		$this->load->model('Activitylog_model');
 		if (!isset($_SESSION['admin'])) {
 			redirect("admin/login");
 		}
 	}
 	public function index(){
-		$id = $_SESSION['admin']->id;
 		$data = [
 			'allRole' => $this->Usersrole_model->getAllRole(),
 		];
-		$activity = "Admin #". $id . " masuk dashboard role";
-		$this->Activitylog_model->setLog($id,$activity);
-		$this->template->load('backend/template', 'backend/users_role/users_role', $data);
+		$this->template->load('admin/template', 'backend/admin/users_role', $data);
 	}
 	public function set($id = null){
 		$id_admin = $_SESSION['admin']->id;

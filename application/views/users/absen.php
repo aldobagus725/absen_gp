@@ -104,14 +104,16 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Sektor</label>
-                                        <select name="sektor" class="form-select" aria-label="Default select example">
-                                            <option value="1">Aha</option>
+                                        <select name="sektor" required class="form-select" aria-label="Default select example">
+                                            <option value="">-- Pilih Sektor --</option>
+                                            <?php foreach ($sektor as $s){ ?>
+                                                <option value="<?= $s->id ?>"><?= $s->sektor ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <br>
-
                             <div class="row">
                                 <div class="col">
                                     <h5>Apakah anda katekisan?</h5>

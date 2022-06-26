@@ -2,15 +2,15 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="<?= base_url()."assets/css/bootstrap.min.css"?>" rel="stylesheet">
-    <link href="<?= base_url()."assets/css/animate.css"?>" rel="stylesheet">
-    <link rel="shortcut icon" href="<?= base_url('assets/img/gpib_new.png') ?>" />
-    <title>Absen GP</title>
-  </head>
-  <body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="<?= base_url()."assets/css/bootstrap.min.css"?>" rel="stylesheet">
+        <link href="<?= base_url()."assets/css/animate.css"?>" rel="stylesheet">
+        <link rel="shortcut icon" href="<?= base_url('assets/img/gpib_new.png') ?>" />
+        <title>Absen GP</title>
+    </head>
+    <body>
     <div class="container mt-2">
         <div class="row" style="padding:2rem 2rem">
             <div class="col-md-2 mx-auto text-center">

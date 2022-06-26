@@ -26,8 +26,10 @@ $route['admin/admins/delete/(:num)'] = 'Admin/delete/$1';
 $route['admin/admins/changepass/(:num)'] = 'Admin/changePassword/$1';
 // Sektor
 $route['admin/sektor'] = 'Sektor';
-$route['admin/sektor/add'] = 'Sektor/set';
-$route['admin/sektor/add/(:num)'] = 'Sektor/set/$1';
+$route['admin/sektor/addForm'] = 'Sektor/addForm';
+$route['admin/sektor/set'] = 'Sektor/set';
+$route['admin/sektor/edit/(:num)'] = 'sektor/editForm/$1';
+$route['admin/sektor/set/(:num)'] = 'sektor/set/$1';
 $route['admin/sektor/delete/(:num)'] = 'Sektor/delete/$1';
 // UsersRole
 $route['admin/role'] = 'UsersRole';

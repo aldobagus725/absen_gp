@@ -54,4 +54,23 @@ class Absen_model extends CI_Model{
 		}
         // return $this->db->get()->row();
     }
+
+	// Counters
+	public function countGPThisDay(){
+		$this->db->where('is_katekisan =', "false");
+		$this->db->where('DATE(created_at)', date("Y-m-d",time()));
+		$count = $this->db->count_all_results('absen_gp');
+		return $count;
+	}
+	public function countKatekisanThisDay(){
+		$this->db->where('is_katekisan =', "true");
+		$this->db->where('DATE(created_at)', date("Y-m-d",time()));
+		$count = $this->db->count_all_results('absen_gp');
+		return $count;
+	}
+	public function countAllThisDay(){
+		$this->db->where('DATE(created_at)', date("Y-m-d",time()));
+		$count = $this->db->count_all_results('absen_gp');
+		return $count;
+	}
 }

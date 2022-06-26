@@ -17,7 +17,7 @@ class Authentication extends CI_Controller{
 			if (isset($_POST['login'])) {
 				$this->loginAdmin($username, $password);
 			}
-			$this->load->view('backend/auth/login');
+			$this->load->view('admin/login');
 		}
 	}
 	/**
@@ -32,10 +32,10 @@ class Authentication extends CI_Controller{
 				$_SESSION['admin'] = $this->Users_model->getAdminInfo($username);
 				redirect('admin');
 			} else {
-				$this->alert->SetAlert('error', 'Username/password invalid!');
+				$this->session->set_flashdata("error", 'Username/password invalid!');
 			}
 		} else {
-			$this->alert->SetAlert('error', 'Username/password invalid!');
+			$this->session->set_flashdata("error", 'Username/password invalid!');
 		}
 	}
 	/**
@@ -44,8 +44,6 @@ class Authentication extends CI_Controller{
 	// Logout Admin
 	public function logoutAdmin(){
 		if (isset($_SESSION['admin'])) {
-			$activity = "Admin #" . $_SESSION['admin']->id . " logged out ";
-			$this->Activitylog_model->setLog($_SESSION['admin']->id, $activity);
 			$this->session->unset_userdata('admin');
 		}
 		redirect('admin/login');
