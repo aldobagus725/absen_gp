@@ -2,12 +2,12 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1>Users</h1>
+				<h1>Absen Hari Ini</h1>
 			</div>
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-					<li class="breadcrumb-item active"><a href="<?= current_url() ?>">Users</a></li>
+					<li class="breadcrumb-item active"><a href="<?= current_url() ?>">Absen Hari Ini</a></li>
 				</ol>
 			</div>
 		</div>
@@ -49,12 +49,7 @@
 					<div class="card-header bg-dark">
 						<div class="row align-items-center">
 							<div class="col">
-								<h3 class="card-title">Data User</h3>
-							</div>
-							<div class="col text-right">
-								<a class="btn btn-primary" href="<?php echo base_url('admin/users/addForm') ?>" >
-									+ Tambah User
-								</a>
+								<h3 class="card-title">Absen Hari Ini</h3>
 							</div>
 						</div>
 					</div>
@@ -63,39 +58,20 @@
 							<table class="table table-bordered table-striped" id="table">
 								<thead>
 									<tr>
-										<th class="text-center">ID</th>
-										<th class="text-center">Username</th>
-                                        <th class="text-center">Role</th>
-										<th class="text-center">Created At</th>
-										<th class="text-center">Updated At</th>
-										<th class="text-center">Aksi</th>
+										<th class="text-center">Nama Lengkap</th>
+										<th class="text-center">Nomor Telepon</th>
+                                        <th class="text-center">Status</th>
+										<th class="text-center">Absen Jam</th>
 									</tr>
 								</thead>
 								<tbody>
-									<?php if ($allUser) {
-										foreach ($allUser as $row) { ?>
+									<?php if ($absens) {
+										foreach ($absens as $row) { ?>
 											<tr>
-												<td class="text-center"><?= $row->id; ?></td>
-												<td class="text-center"><?= $row->username; ?></td>
-                                                <td class="text-center"><?= $row->role; ?></td>
+												<td class="text-center"><?= $row->nama_lengkap; ?></td>
+												<td class="text-center"><?= $row->nomor_telepon; ?></td>
+                                                <td class="text-center"><?= $row->is_katekisan == "true" ? "Katekisan" : "Anggota GP"; ?></td>
 												<td class="text-center"><?= $row->created_at; ?></td>
-												<td class="text-center"><?= $row->updated_at; ?></td>
-												<td class="text-center">
-													<div class="btn-group" role="group">
-														<a href="<?= base_url('admin/users/edit/'.$row->id)?>"
-															class="btn btn-warning">
-															<i class='fas fa-pen'></i>
-														</a>
-														<a href="<?= base_url('admin/users/delete/'.$row->id)?>"
-															class="btn btn-danger">
-															<i class='fas fa-trash-alt'></i>
-														</a>
-                                                        <a href="<?= base_url('admin/users/password/'.$row->id)?>"
-															class="btn btn-info">
-															<i class='fas fa-key'></i>
-														</a>
-													</div>
-												</td>
 											</tr>
 										<?php  }
 									} else { ?> <div class="alert alert-info">Tidak Ada Data</div> <?php } ?>
@@ -103,6 +79,15 @@
 							</table>
 						</div>
 					</div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col">
+                                <p>Jumlah Hadir Hari Ini : <?= $totalKehadiran?></p>
+                                <p>Jumlah Anggota GP : <?= $total_gp?></p>
+                                <p>Jumlah Katekisan : <?= $total_katekisan?></p>
+                            </div>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>

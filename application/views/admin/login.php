@@ -35,7 +35,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <input type="password" required class="form-control" name="password" placeholder="082146.........">
+                                <input type="password" required class="form-control" name="password" placeholder="Password">
                             </div>
                             <hr>
                             <div class="form-group">
@@ -62,6 +62,6 @@
             </div>
         </div>
     </div>
-    <script src="<?= base_url()."assets/jss/bootstrap.bundle.min.js"?>" ></script>
+    <script src="<?= base_url()."assets/js/bootstrap.bundle.min.js"?>" ></script>
   </body>
 </html>

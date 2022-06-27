@@ -1,5 +1,11 @@
 <?php
 class Sektor_model extends CI_Model{
+	/**
+ * Created by Rivaldo
+ * KOMISI INFORKOM
+ * GPIB KASIH KARUNIA BADUNG BALI
+ * 26 Juni 2022
+ */
     public function __construct()
     {
         date_default_timezone_set('Asia/Makassar');

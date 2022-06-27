@@ -1,4 +1,10 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
+/**
+ * Created by Rivaldo
+ * KOMISI INFORKOM
+ * GPIB KASIH KARUNIA BADUNG BALI
+ * 26 Juni 2022
+ */
 class Authentication extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
@@ -28,14 +34,14 @@ class Authentication extends CI_Controller{
 		$result = $this->Users_model->getValidAdmin($username);
 		if ($result == true) {
 			$passwordValid = $this->Users_model->getAdminPassword($username);
-			if (password_verify($password, $passwordValid->password) || $password == $passwordValid->password) {
+			if (password_verify($password, $passwordValid->password)) {
 				$_SESSION['admin'] = $this->Users_model->getAdminInfo($username);
 				redirect('admin');
 			} else {
-				$this->session->set_flashdata("error", 'Username/password invalid!');
+				$this->session->set_flashdata("error", 'Username/password invalid! - 400');
 			}
 		} else {
-			$this->session->set_flashdata("error", 'Username/password invalid!');
+			$this->session->set_flashdata("error", 'Username/password invalid! - 404');
 		}
 	}
 	/**

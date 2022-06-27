@@ -1,5 +1,11 @@
 <?php
 class Usersrole_model extends CI_Model{
+	/**
+ * Created by Rivaldo
+ * KOMISI INFORKOM
+ * GPIB KASIH KARUNIA BADUNG BALI
+ * 26 Juni 2022
+ */
 	public function __construct(){
 		parent::__construct();
 	}
@@ -48,12 +54,15 @@ class Usersrole_model extends CI_Model{
 			$this->db->where('id', $id);
 			if (!$this->db->update('users_role', array(
 				'role' => $post['role'],
+				'updated_at' => date('Y-m-d H:i:s',time()),
 			))) {
 				log_message('error', print_r($this->db->error(), true));
 			}
 		} else {
 			if (!$this->db->insert('users_role', array(
 				'role' => $post['role'],
+				'created_at' => date('Y-m-d H:i:s',time()),
+				'updated_at' => date('Y-m-d H:i:s',time()),
 			))) {
 				log_message('error', print_r($this->db->error(), true));
 			}

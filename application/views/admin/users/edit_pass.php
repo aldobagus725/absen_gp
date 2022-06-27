@@ -2,13 +2,13 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1>Edit User</h1>
+				<h1>Edit Password User</h1>
 			</div>
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="<?= base_url('admin/users') ?>">Users</a></li>
-					<li class="breadcrumb-item active"><a href="<?= current_url() ?>">Edit User</a></li>
+					<li class="breadcrumb-item active"><a href="<?= current_url() ?>">Edit Password User</a></li>
 				</ol>
 			</div>
 		</div>
@@ -23,26 +23,19 @@
                         <h4>Edit User</h4>
                     </div>
                     <?php foreach ($user as $u){ ?>
-                        <form method="POST" action="<?php echo base_url('admin/users/set/').$u->id?>">
+                        <form method="POST" action="<?php echo base_url('admin/users/changepwd/').$u->id?>">
                             <div class="card-body">
+                                <h4>User : <?=$u->username?></h4>
+                                <br>
                                 <div class="mb-3">
-                                    <label class="form-label">Username</label>
-                                    <input type="text" required class="form-control" value="<?= $u->username ?>" name="username" placeholder="username">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Role</label>
-                                    <select name="id_role" required class="form-control" aria-label="Default select example">
-                                        <option value="">-- Pilih Role --</option>
-                                        <?php foreach ($allRoles as $s){ ?>
-                                            <option <?=$s->id == $u->id_role ? "selected" : ""?> value="<?= $s->id ?>"><?= $s->role ?></option>
-                                        <?php } ?>
-                                    </select>
+                                    <label class="form-label">Password Baru</label>
+                                    <input type="password" required class="form-control" value="" name="password" placeholder="password">
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col text-center">
-                                        <input type="submit" name="edit_sektor" value="Edit Admin" class="btn btn-primary">
+                                        <input type="submit" name="update_password" value="Update Password" class="btn btn-primary">
                                     </div>
                                 </div>
                             </div>

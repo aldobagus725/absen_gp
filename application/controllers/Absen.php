@@ -44,4 +44,28 @@ class Absen extends CI_Controller{
 		$this->session->set_flashdata($status, $message);
 		$this->load->view('users/absen_status');
 	}
+	// Some Admin Methods
+	// Absen Hari Ini
+	public function getAbsenThisDay(){
+		$data = [
+            'totalKehadiran' => $this->Absen_model->countAllThisDay(),
+            'total_gp' => $this->Absen_model->countGPThisDay(),
+            'total_katekisan' => $this->Absen_model->countKatekisanThisDay(),
+			'absens' => $this->Absen_model->getAllAbsenThisDay()
+		];
+		$this->template->load('admin/template', 'admin/absen/absen_hari_ini', $data);
+	}
+	// Absen Custom
+	public function getAbsenCustomDate(){
+		$fromDate = trim($this->input->post('fromDate'));
+		$toDate = trim($this->input->post('toDate'));
+		$data = [
+			'tanggalAbsen' => "Tanggal ". $fromDate . " s/d ". $toDate,
+            'totalKehadiran' => $this->Absen_model->countAllCustomDate($fromDate, $toDate),
+            'total_gp' => $this->Absen_model->countGPCustomDate($fromDate, $toDate),
+            'total_katekisan' => $this->Absen_model->countKatekisanCustomDate($fromDate, $toDate),
+			'absens' => $this->Absen_model->getAllAbsenCustomDate($fromDate, $toDate)
+		];
+		$this->template->load('admin/template', 'admin/absen/absen_custom', $data);
+	}
 }

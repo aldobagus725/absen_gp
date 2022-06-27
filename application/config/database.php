@@ -80,7 +80,8 @@ if (preg_match('/\blocalhost\b/', current_url()) || preg_match('/\staging\b/', c
 	$status = "development";
 } else {
 	$database = "u1684059_db_gp";
-	$hostname = "217.21.72.70";
+	// $hostname = "217.21.72.70";
+	$hostname = "localhost";
 	$username = "u1684059_gp";
 	$password = "@GpKkbb2022@";
 	$status = "production";

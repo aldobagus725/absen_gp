@@ -17,7 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/adminlte/plugins/toastr/toastr.min.css">
 		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/adminlte/plugins/summernote/summernote-bs4.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/')?>animate.css"/>
-		<link rel="shortcut icon" href="<?= base_url('assets/img/GP.png') ?>" />
+		<link rel="shortcut icon" href="<?= base_url('assets/img/gpib_new.png') ?>" />
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="<?= base_url() ?>assets/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
 		<script src="<?= base_url() ?>assets/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
@@ -48,7 +48,7 @@
 				<!-- Brand Logo -->
 				<a href="<?= base_url('admin') ?>" class="brand-link">
 					<img src="<?= base_url('assets/img/gpib_new.png') ?>" alt="GP" class="brand-image" style="opacity: .8">
-					<span class="brand-text font-weight-bold">GP</span>
+					<span class="brand-text font-weight-bold">GP KKBB Dashboard</span>
 				</a>
 				<!-- Sidebar -->
 				<div class="sidebar sidebar-fixed">
@@ -71,7 +71,7 @@
 									<p>DASHBOARD</p>
 								</a>
 							</li>
-							<?php $absen = array(base_url('admin/absen'), base_url('admin/absen_report'));?>
+							<?php $absen = array(base_url('admin/absen/hari_ini'), base_url('admin/absen/custom_date'));?>
 							<li class="nav-item 
 								<?php if (in_array(current_url(), $absen)) {
 									echo "menu-open";
@@ -86,31 +86,33 @@
 								<ul class="nav nav-treeview">
 									<!-- MENUS -->
 									<li class="nav-item">
-										<a href="<?= base_url('admin/absen') ?>" class="nav-link <?= (current_url() == base_url('admin/absen')) ? 'active' : '' ?>">
+										<a href="<?= base_url('admin/absen/hari_ini') ?>" class="nav-link <?= (current_url() == base_url('admin/absen/hari_ini')) ? 'active' : '' ?>">
 											<i class="nav-icon fas fa-user-friends"></i>
 											<p>Absen Hari Ini</p>
 										</a>
 									</li>
 									<li class="nav-item">
-										<a href="<?= base_url("admin/absen_report") ?>" class="nav-link <?= (current_url() == base_url('admin/absen_report')) ? 'active' : '' ?>">
+										<a href="<?= base_url("admin/absen/custom_date") ?>" class="nav-link <?= (current_url() == base_url('admin/absen/custom_date')) ? 'active' : '' ?>">
 											<i class="nav-icon fas fa-file-alt"></i>
 											<p>Laporan Absen</p>
 										</a>
 									</li>
 								</ul>
 							</li>
-							<li class="nav-item">
-								<a href="<?= base_url('admin/sektor') ?>" class="nav-link <?= (current_url() == base_url('admin/sektor')) || (current_url() == base_url('admin/sektor')) ? 'active' : '' ?>">
-									<i class="nav-icon fas fa-map-marker "></i>
-									<p>SEKTOR</p>
-								</a>
-							</li>
+							<?php if($_SESSION['admin']->role == "superadmin"){ ?>
+								<li class="nav-item">
+									<a href="<?= base_url('admin/sektor') ?>" class="nav-link <?= (current_url() == base_url('admin/sektor')) || (current_url() == base_url('admin/sektor')) ? 'active' : '' ?>">
+										<i class="nav-icon fas fa-map-marker "></i>
+										<p>SEKTOR</p>
+									</a>
+								</li>
+							<?php } ?>
+
 							<!-- ========== SETTINGS ========== -->
 							<?php
 							// Links for users
 							$settings = array(
-								base_url('admin/role'), base_url("admin/settings"), base_url("admin/warung/level"),
-								base_url('admin/admins'), base_url("admin/logs"), base_url("admin/area")
+								base_url('admin/role'),base_url('admin/users')
 							);
 							?>
 							<?php if ($_SESSION['admin']->role == "superadmin") { ?>
@@ -129,7 +131,7 @@
 										<!-- MENUS -->
 										<?php if ($_SESSION['admin']->role == "superadmin") { ?>
 											<li class="nav-item">
-												<a href="<?= base_url('admin/admins') ?>" class="nav-link <?= (current_url() == base_url('admin/admins')) ? 'active' : '' ?>">
+												<a href="<?= base_url('admin/users') ?>" class="nav-link <?= (current_url() == base_url('admin/users')) ? 'active' : '' ?>">
 													<i class="nav-icon fas fa-user-cog"></i>
 													<p>Admins</p>
 												</a>

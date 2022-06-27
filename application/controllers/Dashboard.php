@@ -1,6 +1,9 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 /**
- * Update per 0/04/2022
+ * Created by Rivaldo
+ * KOMISI INFORKOM
+ * GPIB KASIH KARUNIA BADUNG BALI
+ * 26 Juni 2022
  */
 class Dashboard extends CI_Controller{
 	public function __construct(){

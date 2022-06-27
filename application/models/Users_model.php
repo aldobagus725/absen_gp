@@ -1,5 +1,11 @@
 <?php
 class Users_model extends CI_Model{
+	/**
+ * Created by Rivaldo
+ * KOMISI INFORKOM
+ * GPIB KASIH KARUNIA BADUNG BALI
+ * 26 Juni 2022
+ */
     public function __construct()
     {
         date_default_timezone_set('Asia/Makassar');
@@ -9,6 +15,19 @@ class Users_model extends CI_Model{
 	public function getAllAdmins(){
 		$this->db->select('users.*, users_role.role ')
 			->from('users')
+			->join('users_role', 'users_role.id = users.id_role');
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return false;
+		}
+	}
+	// Get All Admins
+	public function getOneAdmin($id){
+		$this->db->select('users.*, users_role.role ')
+			->from('users')
+			->where('users.id =',$id)
 			->join('users_role', 'users_role.id = users.id_role');
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
@@ -65,6 +84,8 @@ class Users_model extends CI_Model{
 			'id_role' => $post['id_role'],
 			'username' => $post['username'],
 			'password' => $post['password'],
+			'created_at' => date('Y-m-d H:i:s',time()),
+			'updated_at' => date('Y-m-d H:i:s',time()),
 		))) {
 			log_message('error', print_r($this->db->error(), true));
 		}
@@ -83,6 +104,7 @@ class Users_model extends CI_Model{
 		if (!$this->db->update('users', array(
 			'username' => $post['username'],
 			'id_role' => $post['id_role'],
+			'updated_at' => date('Y-m-d H:i:s',time()),
 		))) {
 			log_message('error', print_r($this->db->error(), true));
 		}
@@ -100,7 +122,8 @@ class Users_model extends CI_Model{
 		$this->db->trans_begin();
 		$this->db->where('id', $id);
 		if (!$this->db->update('users', array(
-			'password' => $password
+			'password' => $password,
+			'updated_at' => date('Y-m-d H:i:s',time()),
 		))) {
 			log_message('error', print_r($this->db->error(), true));
 		}
@@ -114,7 +137,6 @@ class Users_model extends CI_Model{
 	}
 	// Delete Admin to the system
 	public function deleteAdmin($id){
-		$this->db->where('id', $id);
-		$this->db->delete('users');
+		return $this->db->delete('users',  array('id' => $id));
 	}
 }

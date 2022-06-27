@@ -1,5 +1,10 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
-
+/**
+ * Created by Rivaldo
+ * KOMISI INFORKOM
+ * GPIB KASIH KARUNIA BADUNG BALI
+ * 26 Juni 2022
+ */
 class Sektor extends CI_Controller{
 	public function __construct(){
 		parent::__construct();

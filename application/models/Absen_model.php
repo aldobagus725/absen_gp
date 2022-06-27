@@ -1,5 +1,11 @@
 <?php
 class Absen_model extends CI_Model{
+	/**
+ * Created by Rivaldo
+ * KOMISI INFORKOM
+ * GPIB KASIH KARUNIA BADUNG BALI
+ * 26 Juni 2022
+ */
     public function __construct()
     {
         date_default_timezone_set('Asia/Makassar');
@@ -54,7 +60,6 @@ class Absen_model extends CI_Model{
 		}
         // return $this->db->get()->row();
     }
-
 	// Counters
 	public function countGPThisDay(){
 		$this->db->where('is_katekisan =', "false");
@@ -70,6 +75,62 @@ class Absen_model extends CI_Model{
 	}
 	public function countAllThisDay(){
 		$this->db->where('DATE(created_at)', date("Y-m-d",time()));
+		$count = $this->db->count_all_results('absen_gp');
+		return $count;
+	}
+	// Reports
+	public function getAllAbsenThisDay(){
+		$this->db	->join('sektor', 'sektor.id = absen_gp.id_sektor')
+					->select('absen_gp.*, sektor.sektor ')
+					->from('absen_gp')
+					->where('DATE(absen_gp.created_at)', date("Y-m-d",time()));
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return false;
+		}
+	}
+	// Custom Reports per Date
+	public function getAllAbsenCustomDate($fromDate = null, $toDate = null){
+		$this->db	->join('sektor', 'sektor.id = absen_gp.id_sektor')
+					->select('absen_gp.*, sektor.sektor ')
+					->from('absen_gp');
+		if ($fromDate != null || $toDate != null){
+			$this->db->where('DATE(absen_gp.created_at) >=', $fromDate);
+			$this->db->where('DATE(absen_gp.created_at) <=', $toDate);
+		}
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return false;
+		}		
+	}
+	// Counters
+	public function countGPCustomDate($fromDate = null, $toDate = null){
+		$this->db->where('is_katekisan =', "false");
+		if ($fromDate != null || $toDate != null){
+			$this->db->where('DATE(created_at) >=', $fromDate);
+			$this->db->where('DATE(created_at) <=', $toDate);
+		}
+		$count = $this->db->count_all_results('absen_gp');
+		return $count;
+	}
+	public function countKatekisanCustomDate($fromDate = null, $toDate = null){
+		$this->db->where('is_katekisan =', "true");
+		if ($fromDate != null || $toDate != null){
+			$this->db->where('DATE(created_at) >=', $fromDate);
+			$this->db->where('DATE(created_at) <=', $toDate);
+		}
+		$count = $this->db->count_all_results('absen_gp');
+		return $count;
+	}
+	public function countAllCustomDate($fromDate = null, $toDate = null){
+		if ($fromDate != null || $toDate != null){
+			$this->db->where('DATE(created_at) >=', $fromDate);
+			$this->db->where('DATE(created_at) <=', $toDate);
+		}
 		$count = $this->db->count_all_results('absen_gp');
 		return $count;
 	}
