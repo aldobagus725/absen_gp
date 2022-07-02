@@ -60,7 +60,7 @@ class Absen_model extends CI_Model{
 		}
         // return $this->db->get()->row();
     }
-	// Counters
+	// Counters Per Day
 	public function countGPThisDay(){
 		$this->db->where('is_katekisan =', "false");
 		$this->db->where('DATE(created_at)', date("Y-m-d",time()));
@@ -77,6 +77,14 @@ class Absen_model extends CI_Model{
 		$this->db->where('DATE(created_at)', date("Y-m-d",time()));
 		$count = $this->db->count_all_results('absen_gp');
 		return $count;
+	}
+	public function countPerSektorThisDay(){
+		$this->db 	->select('sektor.sektor, count(sektor.sektor) as total_hadir')
+					->join('sektor', 'sektor.id = absen_gp.id_sektor')
+					->where('DATE(absen_gp.created_at)', date("Y-m-d",time()))
+					->group_by('sektor.sektor'); 
+		$data = $this->db->get('absen_gp');
+		return $data->result();
 	}
 	// Reports
 	public function getAllAbsenThisDay(){
@@ -133,5 +141,16 @@ class Absen_model extends CI_Model{
 		}
 		$count = $this->db->count_all_results('absen_gp');
 		return $count;
+	}
+	public function countPerCustomDate($fromDate = null, $toDate = null){
+		$this->db 	->select('sektor.sektor, count(sektor.sektor) as total_hadir')
+					->join('sektor', 'sektor.id = absen_gp.id_sektor')
+					->group_by('sektor.sektor'); 
+		if ($fromDate != null || $toDate != null){
+			$this->db->where('DATE(absen_gp.created_at) >=', $fromDate);
+			$this->db->where('DATE(absen_gp.created_at) <=', $toDate);
+		}
+		$data = $this->db->get('absen_gp');
+		return $data->result();
 	}
 }

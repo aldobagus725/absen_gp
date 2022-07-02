@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<?= base_url()."assets/css/bootstrap.min.css"?>" rel="stylesheet">
-    <link href="<?= base_url()."assets/css/animate.css"?>" rel="stylesheet">
     <link rel="shortcut icon" href="<?= base_url('assets/img/gpib_new.png') ?>" />
     <title>Absen GP</title>
   </head>
@@ -62,9 +61,8 @@
                     if ($day != "Fri" || $hour > 22){
                         ?>
                         <div class="alert alert-danger" role="alert">
-                           Maaf, absen nya ditutup sampai Jumat minggu depan. Kita tunggu kedatangannya ya!
+                           Maaf, absen nya sudah ditutup sampai Jumat minggu depan. Kami tunggu kedatangannya ya!
                         </div>
-
                         <?php
                     } else if ($day == "Fri" && $hour < 18){
                         ?>
@@ -72,7 +70,7 @@
                            Absen belum dibuka, tunggu sampai pukul 18.00 ya!
                         </div>
                         <?php
-                    } else if  ($day == "Fri" && $hour > 20){
+                    } else if  ($day == "Fri" && $hour > 21){
                         ?>
                         <div class="alert alert-danger" role="alert">
                            Absen sudah ditutup ya!
@@ -80,64 +78,64 @@
                         <?php
                     }
                      else {
-                        echo "hari jumat";
+                        ?>
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center bg-primary text-white">
+                                <h4><?php echo tanggal_indo (date("Y-m-d",time()), true); ?></h4>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST" action="<?php echo base_url('absen/signin')?>">
+                                    <div class="mb-3">
+                                        <label class="form-label">Nama Lengkap</label>
+                                        <input type="text" required class="form-control" name="nama_lengkap" placeholder="Nama Lengkap">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Nomor Telepon</label>
+                                                <input type="text" required maxlength="15" class="form-control" name="nomor_telepon" placeholder="082146.........">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Sektor</label>
+                                                <select name="sektor" required class="form-select" aria-label="Default select example">
+                                                    <option value="">-- Pilih Sektor --</option>
+                                                    <?php foreach ($sektor as $s){ ?>
+                                                        <option value="<?= $s->id ?>"><?= $s->sektor ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5>Apakah anda katekisan?</h5>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="is_katekisan" id="inlineRadio1" value="true">
+                                                <label class="form-check-label" for="inlineRadio1">Ya</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="is_katekisan" id="inlineRadio2" value="false" checked>
+                                                <label class="form-check-label" for="inlineRadio2">Tidak</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <input type="submit" name="absen" id="tbl_absen" value="Absen Masuk" class="btn btn-primary">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <?php
                     }
-
                 ?>
-                <div class="card shadow-sm">
-                    <div class="card-header text-center bg-primary text-white">
-                        <h4><?php echo tanggal_indo (date("Y-m-d",time()), true); ?></h4>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="<?php echo base_url('absen/signin')?>">
-                            <div class="mb-3">
-                                <label class="form-label">Nama Lengkap</label>
-                                <input type="text" required class="form-control" name="nama_lengkap" placeholder="Nama Lengkap">
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Nomor Telepon</label>
-                                        <input type="text" required maxlength="15" class="form-control" name="nomor_telepon" placeholder="082146.........">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Sektor</label>
-                                        <select name="sektor" required class="form-select" aria-label="Default select example">
-                                            <option value="">-- Pilih Sektor --</option>
-                                            <?php foreach ($sektor as $s){ ?>
-                                                <option value="<?= $s->id ?>"><?= $s->sektor ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col">
-                                    <h5>Apakah anda katekisan?</h5>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="is_katekisan" id="inlineRadio1" value="true">
-                                        <label class="form-check-label" for="inlineRadio1">Ya</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="is_katekisan" id="inlineRadio2" value="false" checked>
-                                        <label class="form-check-label" for="inlineRadio2">Tidak</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <input type="submit" name="absen" id="tbl_absen" value="Absen Masuk" class="btn btn-primary">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="row" style="padding:4rem 2rem;">
